@@ -5,3 +5,4 @@ what's new in V1.3:
 -Register using DB project V2.0
 -server response 
 -APIs to deliver information to the server 
+-Error handling 

@@ -13,3 +13,7 @@ what's new in V2.0
 - verification maintainance 
 - more efficient using good search algorithm
 - faster: thanks to json 
+
+--------------------------------------------
+what's new in V2.1
+- email verfication added

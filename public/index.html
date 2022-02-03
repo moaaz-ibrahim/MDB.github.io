@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login system</title>
+</head>
+<style>
+    .register-form {
+            width: 300px;
+            margin: 0 auto;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+        
+        .register-form h1 {
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+        
+        .register-form input[type="password"],
+        .register-form input[type="username"],
+        .register-form input[type="email"]{
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        .register-form input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #535b63;
+            border: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        
+        .register-form {
+            width: 300px;
+            margin: 0 auto;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+        
+        .register-form h1 {
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+        
+        .register-form input[type="password"],
+        .register-form input[type="username"]
+        {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        
+           button {
+            width: 100%;
+            padding: 15px;
+            background-color: #535b63;
+            border: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .success {
+            color: green;
+        }
+        .failed {
+            color: red;
+        }
+        .login-form {
+            width: 300px;
+            margin: 0 auto;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+        
+        .login-form h1 {
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+        
+        .login-form input[type="password"],
+        .login-form input[type="username"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        
+</style>
+<body>
+    <div class="register-form">
+        
+            <h1>register Form</h1>
+    
+            <input type="username" class="username"  placeholder="Username" required>
+            <input type="password" class="password"  placeholder="Password" required>
+            <input type="username" class="mail"  placeholder="Email" required>
+            <button class="register">register</button>
+            <h3 class="reg"></h3>
+      
+        
+    </div>
+    <div class="login-form">
+        
+        <h1>Login Form</h1>
+
+        <input type="username" class="usernameLogin"  placeholder="Username" required>
+        <input type="password" class="passwordLogin"  placeholder="Password" required>
+        <button class="login-btn">Login</button>
+        <h3 class="log"></h3>
+  
+    
+</div>
+   
+      <script>
+          const reg = document.querySelector('.reg')
+          const registerBtn = document.querySelector('.register');
+          const log  = document.querySelector('.log');
+          const loginBtn = document.querySelector('.login-btn');
+          registerBtn.addEventListener('click' , async()=>{
+              const Username = document.querySelector('.username').value;
+              const password = document.querySelector('.password').value;
+              const mail = document.querySelector('.mail').value;
+              if (Username == '' || password =='' || mail=='')
+              {console.log('Empty Registeration Fields');
+              reg.innerText = 'please fill in the fields';
+              reg.className = 'failed';
+          }
+              else {
+                  console.log('Good')
+                  const data = {"username" : Username , "password" :password ,"mail":mail};
+                  const options = {
+                method: 'POST',
+                  headers: {
+            'Content-Type': 'application/json'
+            },
+             body: JSON.stringify(data) 
+              }
+              console.log(Username , password)
+              
+              const request = await fetch('/register' , options);
+              const res = await request.json();
+              if (res == 1){
+                  reg.innerText = 'Success Registeration';
+                  reg.className = 'success';
+              }
+              else {
+                reg.innerText = 'Unsccess Registeration';
+              reg.className = 'failed'}
+              }
+          })
+          loginBtn.addEventListener('click' , async()=>{
+            const Username = document.querySelector('.usernameLogin').value;
+              const password = document.querySelector('.passwordLogin').value;
+              if (Username == '' || password ==''){
+                  console.log('Empty Login Fields')
+                  log.innerText = 'Please fill in the fields';
+                  log.className = 'failed';
+              }
+              else {
+                const data = {"username" : Username , "password" :password};
+              const options = {
+                method: 'POST',
+                headers: {
+               'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(data) 
+              }
+              const request = await fetch('/login' , options);
+              const result = await request.json();
+              if (result == 1)
+              {
+                  log.innerText = 'Right information';
+                  log.className = 'success';
+              }
+              else {
+                  log.innerText = 'Wrong information';
+                  log.className = 'failed';
+              }
+              }
+          })
+      </script>
+</body>
+</html>

@@ -11,6 +11,16 @@ SO WHAT IS SO SPECIAL ABOUT THIS SYSTEM ANYWAY ?
  - if you want to use a DB in your project quickly and don't want to worry about installation and knowing the SQL language 
  - if you are new to the world of DBMS and want to know how the work done
 
+GETTING STARTED:
+- fork this repo
+- navigate to the directory
+- run npm install 
+USING DB
+- its simple jsut require db.js in your broject and you can start using all methods 
+- feel free to contirubute and edit the methods inside db.js 
+- if you want to link it to your project you can do all waht you want inside app.js
+
+
 ----------------------------
 what's new in V1.3:
 -Register using DB project V2.1

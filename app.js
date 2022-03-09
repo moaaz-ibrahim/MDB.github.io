@@ -2,7 +2,6 @@ const { login } = require('./db');
 const database = require('./db');
 const express= require('express');
 const fs = require('fs');
-const { use } = require('express/lib/application');
 const readFile = fs.readFileSync;
 const writeFile = fs.writeFileSync;
 const app = express();
@@ -15,15 +14,22 @@ app.post('/register' , (req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
     const mail = req.body.mail;
-    var reg = database.register(username , password , mail);
-    if (reg)
-    {
-        res.json(1)
-        console.log('success registeration');
-    }
-    else {
+    if (username.includes(`"`) || password.includes(`"`) || mail.includes(`"`)){
         res.json(0)
-        console.log('unseccess')}
+    }
+  else if (username.includes(``) || password.includes(``) || mail.includes(``))res.json(0)
+    else{
+        var reg = database.register(username , password , mail);
+        if (reg)
+        {
+            res.json(1)
+            console.log('success registeration');
+        }
+        else {
+            res.json(0)
+            console.log('unseccess')}
+    }
+    
     
 
 })

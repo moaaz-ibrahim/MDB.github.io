@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login system</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
 </head>
 <style>
     .register-form {
@@ -76,10 +83,10 @@
             color: #ffffff;
         }
         .success {
-            color: green;
+            color: #136f2c;
         }
         .failed {
-            color: red;
+            color: #8e0b28;
         }
         .login-form {
             width: 300px;
@@ -102,10 +109,57 @@
             margin-bottom: 15px;
             box-sizing: border-box;
         }
+        .info {
+            text-align: center;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+        }
+        .project-info {
+            width: 50%;
+            height: 250px;
+            background-color: bisque;
+            margin: 0 auto;
+            display: none;
+        }
+        .project-info > h2 {
+            font-family: 'Sansita Swashed', cursive;
+        }
+        .question {
+            color: #8e0b28;
+        }
+        .answer {
+            color: #136f2c;
+        }
+        small{
+            color:grey;
+        }
+        h3{
+            font-family: 'Sansita Swashed', cursive;
+        }
+        @media only screen and (max-width: 600px){
+            .project-info{
+                width: 80%;
+                height: 350px;
+            }
+        }
+        /* .project {
+            align-items: center;
+        } */
         
         
 </style>
 <body>
+
+    <div class="project">
+        <h1 class="info">What is this ? <small>(click)</small></h1>
+        <div class="project-info">
+            <h2>So this project is a simple database projet </h2>
+            <h2>it basically stores the credentials that user register into a json datbase</h2>
+            <h2 class="question">-where you can find the users ? or where is the daatabase ?</h2>
+            <h2 class="answer">+navigte to the previous folder and open database.json</h2>
+
+        </div>
+    </div>
     <div class="register-form">
         
             <h1>register Form</h1>
@@ -135,14 +189,30 @@
           const registerBtn = document.querySelector('.register');
           const log  = document.querySelector('.log');
           const loginBtn = document.querySelector('.login-btn');
+          const info = document.querySelector('.info');
+          const project = document.querySelector('.project-info')
+          var clicker = 0;
+
+
           registerBtn.addEventListener('click' , async()=>{
               const Username = document.querySelector('.username').value;
               const password = document.querySelector('.password').value;
               const mail = document.querySelector('.mail').value;
+
+              // Validation of inputs 
+
               if (Username == '' || password =='' || mail=='')
               {console.log('Empty Registeration Fields');
-              reg.innerText = 'please fill in the fields';
+              reg.innerText = 'Please fill in the fields';
               reg.className = 'failed';
+
+              if (Username.includes(`"`) || password.includes(`"`) || mail.includes(`"`))
+              {
+                  console.log('invalid inputs');
+                  reg.innerText = 'Invalid inputs';
+                  reg.className = 'failed';
+              }
+             
           }
               else {
                   console.log('Good')
@@ -163,7 +233,7 @@
                   reg.className = 'success';
               }
               else {
-                reg.innerText = 'Unsccess Registeration';
+                reg.innerText = 'Unsccess Registeration ';
               reg.className = 'failed'}
               }
           })
@@ -188,15 +258,24 @@
               const result = await request.json();
               if (result == 1)
               {
-                  log.innerText = 'Right information';
+                  log.innerText = 'Right information user \n exists in the DataBase';
                   log.className = 'success';
               }
               else {
-                  log.innerText = 'Wrong information';
+                  log.innerText = `Wrong information \n username or password isn't correct `;
                   log.className = 'failed';
               }
               }
           })
+
+          info.addEventListener('click' , ()=>{
+              if (clicker %2 == 0)
+              project.style.display = 'block';
+              else project.style.display = 'none';
+              clicker++;
+
+          })
+          
       </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-this is a DBMS built using the concepts of file system in node js and 
+this is MDB a DBMS built using the concepts of file system in node js and 
 concepts of json and good algorithms for searching and inserting 
 
 -----------------------------------------------

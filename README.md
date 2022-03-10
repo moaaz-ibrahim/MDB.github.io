@@ -1,4 +1,4 @@
-# login_system\
+# MDB
 what is this :
 This is MDB
 Login/Registeration system based on DataBase Project V2.1 (Consider reading readme-db.txt)

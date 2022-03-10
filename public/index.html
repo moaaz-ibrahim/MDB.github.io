@@ -206,12 +206,12 @@
               reg.innerText = 'Please fill in the fields';
               reg.className = 'failed';
 
-              if (Username.includes(`"`) || password.includes(`"`) || mail.includes(`"`))
-              {
-                  console.log('invalid inputs');
-                  reg.innerText = 'Invalid inputs';
-                  reg.className = 'failed';
-              }
+            //   if (Username.includes(`"`) || password.includes(`"`) || mail.includes(`"`))
+            //   {
+            //       console.log('invalid inputs');
+            //       reg.innerText = 'Invalid inputs';
+            //       reg.className = 'failed';
+            //   }
              
           }
               else {
@@ -256,7 +256,12 @@
               }
               const request = await fetch('/login' , options);
               const result = await request.json();
-              if (result == 1)
+              
+              if (result.response == 2){
+                  console.log('Admin logging')
+                  document.write(result.data)
+              }
+             else if (result == 1)
               {
                   log.innerText = 'Right information user \n exists in the DataBase';
                   log.className = 'success';

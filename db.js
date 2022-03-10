@@ -5,6 +5,9 @@ const fs =require('fs');
 const file = require('fs-extra/lib/ensure/file');
 const readFile = fs.readFileSync;
 const writeFile = fs.writeFileSync;
+
+const requiredFields =['username' , 'password' , 'email']
+
 // file length -2
 var rowId = 0 ;
 var rows =[];
@@ -36,9 +39,9 @@ else {
 
 var write = `
 {
-    "username": "${username}",
-    "password":"${password}",
-    "email":"${mail}"
+    "${requiredFields[0]}": "${username}",
+    "${requiredFields[1]}":"${password}",
+    "${requiredFields[2]}":"${mail}"
 },`;
 // console.log(file[file.length-1])
 if (file[(file.length)-1] == "]")
@@ -47,9 +50,9 @@ if (file[(file.length)-1] == "]")
 file = file.replace(file[(file.length)-1] , " ");
 writeFile(dbDirectory , file);
 write =`,{
-    "username": "${username}",
-    "password":"${password}",
-    "email":"${mail}"
+    "${requiredFields[0]}": "${username}",
+    "${requiredFields[1]}":"${password}",
+    "${requiredFields[2]}":"${mail}"
 }
 ]` 
 // if (file.length == 63)
@@ -143,6 +146,9 @@ function an(){
 //    file = JSON.parse(file)
     console.log(file[2])
 }
+function readDb(){
+  return  readFile(dbDirectory , 'utf-8')
+}
 
 
 
@@ -152,7 +158,8 @@ module.exports={
     Search: search,
     firstSearch: firstSearch,
     login:login,
-    register:register
+    register:register,
+    readDb:readDb
 }
 
 

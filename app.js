@@ -17,7 +17,7 @@ app.post('/register' , (req,res)=>{
     if (username.includes(`"`) || password.includes(`"`) || mail.includes(`"`)){
         res.json(0)
     }
-    else if (username.includes(``) || password.includes(``) || mail.includes(``))res.json(0)
+      else if (username== '' || password== '' || mail== '')res.json(0)
     else{
         var reg = database.register(username , password , mail);
         if (reg)
